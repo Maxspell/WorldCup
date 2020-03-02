@@ -1,0 +1,28 @@
+{% extends 'mainApp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="jumbotron">
+                <h1>{{ team.title }}</h1>
+                {% if team.image %}
+                    <img src="{{ team.image.url }}" width="666" alt="Пример">
+                {% endif %}
+                <div class="row">
+                    <div class="col-12">
+                        {{ team.text|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  Basic panel
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'mainApp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="jumbotron">
+                <h1>{{ match }}</h1>
+                {% if match.image %}
+                    <img src="{{ match.image.url }}" width="666" alt="Пример">
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-4">
+                        <table class="table table-bordered table-striped table-active table-hover">
+                            <tbody>
+                            {% for item in home_match_statistics %}
+                                <tr><td class="text-center">{{ item.goals_scored }}</td></tr>
+                                <tr><td class="text-center">{{ item.attempts }}</td></tr>
+                                <tr><td class="text-center">{{ item.on_target }}</td></tr>
+                                <tr><td class="text-center">{{ item.off_target }}</td></tr>
+                                <tr><td class="text-center">{{ item.blocked }}</td></tr>
+                                <tr><td class="text-center">{{ item.corners }}</td></tr>
+                                <tr><td class="text-center">{{ item.offsides }}</td></tr>
+                                <tr><td class="text-center">{{ item.ball_possession }}</td></tr>
+                                <tr><td class="text-center">{{ item.ball_possession }}</td></tr>
+                                <tr><td class="text-center">{{ item.ball_possession }}</td></tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+                        <table class="table table-bordered table-striped table-active table-hover">
+                            <tbody>
+                            <tr><td class="text-center">Голы</td></tr>
+                            <tr><td class="text-center">Удары в створ</td></tr>
+                            <tr><td class="text-center">Удары мимо</td></tr>
+                            <tr><td class="text-center">Заблокированные удары</td></tr>
+                            <tr><td class="text-center">Угловые</td></tr>
+                            <tr><td class="text-center">Оффсайды</td></tr>
+                            <tr><td class="text-center">Владение мячом</td></tr>
+                            <tr><td class="text-center">Точность передач</td></tr>
+                            <tr><td class="text-center">Пасы</td></tr>
+                            <tr><td class="text-center">Успешные пасы</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+                        <table class="table table-bordered table-striped table-active table-hover">
+                            <tbody>
+                            {% for item in away_match_statistics %}
+                                <tr><td class="text-center">{{ item.goals_conceded }}</td></tr>
+                                <tr><td class="text-center">{{ item.attempts }}</td></tr>
+                                <tr><td class="text-center">{{ item.on_target }}</td></tr>
+                                <tr><td class="text-center">{{ item.off_target }}</td></tr>
+                                <tr><td class="text-center">{{ item.blocked }}</td></tr>
+                                <tr><td class="text-center">{{ item.corners }}</td></tr>
+                                <tr><td class="text-center">{{ item.offsides }}</td></tr>
+                                <tr><td class="text-center">{{ item.ball_possession }}</td></tr>
+                                <tr><td class="text-center">{{ item.ball_possession }}</td></tr>
+                                <tr><td class="text-center">{{ item.ball_possession }}</td></tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <table class="table table-bordered table-striped table-active table-hover">
+                            <tbody>
+                                    {% for item in home_team_players %}
+                                        <tr>
+                                            <td class="text-center">{{ item.player.number }}</td>
+                                            <td>{{ item.player.title }}</td>
+                                        </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6">
+                        <table class="table table-bordered table-striped table-active table-hover">
+                            <tbody>
+                                {% for item in away_team_players %}
+                                    <tr>
+                                        <td class="text-center">{{ item.player.number }}</td>
+                                        <td>{{ item.player.title }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{ match.text|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  Basic panel
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

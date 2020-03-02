@@ -1,0 +1,123 @@
+{% extends 'mainApp/base.html' %}
+
+{% block content %}
+    <div id="app">
+        <p>{% verbatim %}{{ message }}{% endverbatim %} </p>
+</div>
+    <script>
+    var app = new Vue({
+  el: '#app',
+  data: function() {
+  return {
+    message: 'Hello Vue!'
+  }
+}
+})
+    </script>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped table-active table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Дата</th>
+                            <th class="text-center" scope="col">Матч</th>
+                            <th class="text-center" scope="col">Счет</th>
+                            <th class="text-center" scope="col">Стадион</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in matches  %}
+                        <tr>
+                            <td class="text-center">26.06.2018</td>
+                            <td class="text-center"><a href="{% url 'match_detail' pk=item.pk slug=item.slug %}">{{ item.title }}</a></td>
+                            <td class="text-center">{{ item.score }}</td>
+                            <td class="text-center">{{ item.stadium }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped table-active table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Сборная</th>
+                            <th class="text-center" scope="col">И</th>
+                            <th class="text-center" scope="col">В</th>
+                            <th class="text-center" scope="col">Н</th>
+                            <th class="text-center" scope="col">П</th>
+                            <th class="text-center" scope="col">ЗП</th>
+                            <th class="text-center" scope="col">Р</th>
+                            <th class="text-center" scope="col">О</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in teams  %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td class="text-center"><a href="{% url 'team_detail' pk=item.pk slug=item.slug %}">{{ item.title }}</a></td>
+                            <td class="text-center">{{ item.count_matches }}</td>
+                            <td class="text-center">{{ item.win_count }}</td>
+                            <td class="text-center">{{ item.draw_count }}</td>
+                            <td class="text-center">{{ item.loss_count }}</td>
+                            <td class="text-center">{{ item.goals_scored }}-{{ item.goals_conceded }}</td>
+                            <td class="text-center">{{ item.difference }}</td>
+                            <td class="text-center">{{ item.points }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped table-active table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Игрок</th>
+                            <th class="text-center" scope="col">Матчи</th>
+                            <th class="text-center" scope="col">Голы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in players  %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td class="text-center"><a href="{% url 'player_detail' pk=item.pk slug=item.slug %}">{{ item.title }}</a></td>
+                            <td class="text-center">{{ item.count_matches }}</td>
+                            <td class="text-center">{{ item.goals }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped table-active table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col">Дата</th>
+                            <th class="text-center" scope="col">Турнир</th>
+                            <th class="text-center" scope="col">Страна</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in tournaments  %}
+                        <tr>
+                            <td class="text-center">26.06.2018</td>
+                            <td class="text-center"><a href="{% url 'tournament_detail' pk=item.pk slug=item.slug %}">{{ item.title }}</a></td>
+                            <td class="text-center">{{ item.country.title }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'mainApp/base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+                            <table class="table table-bordered table-striped table-active table-hover">
+                              <thead>
+                                <tr>
+                                  <th class="text-center" scope="col">#</th>
+                                  <th class="text-center" scope="col">Игрок</th>
+                                  <th class="text-center" scope="col">Сборная</th>
+                                  <th class="text-center" scope="col">Матчи</th>
+                                  <th class="text-center" scope="col">Голы</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for item in player_list  %}
+
+                                <tr>
+                                  <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                                  <td class="text-center"><a href="{% url 'player_detail' slug=item.slug pk=item.pk %}">{{ item.title }}</a></td>
+                                  <td class="text-center"><a href="{% url 'team_detail' slug=item.team.slug pk=item.team.id %}">{{ item.team.title }}</a> </td>
+                                  <td class="text-center">{{ item.count_matches }}</td>
+                                  <td class="text-center">{{ item.goals }}</td>
+                                </tr>
+
+                              {% endfor %}
+                              </tbody>
+                            </table>
+        {% if player_list.has_other_pages %}
+        <ul class="pagination">
+                {% if player_list.has_previous %}
+                    <li><a href="?page={{ player_list.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><a href="#">&laquo;</a></li>
+                {% endif %}
+            {% for i in player_list.paginator.page_range %}
+                {% if player_list.number == i %}
+                    <li class="active"><a href="#">{{ i }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+                {% if player_list.has_next %}
+                    <li><a href="?page={{ player_list.paginator.num_pages }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><a href="#">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  Basic panel
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

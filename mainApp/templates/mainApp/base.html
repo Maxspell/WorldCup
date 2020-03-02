@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'mainApp/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'mainApp/css/custom.css' %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+
+        <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Brand</a>
+    </div>
+
+    <div class="collapse navbar-collapse navbar-default" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          {% with url_name=request.resolver_match.url_name %}
+            <li class="{% if url_name == 'tournament_list' or url_name == 'tournament_detail' %}active{% endif %}">
+                <a href="/tournaments">Турниры</a></li>
+            <li class="{% if url_name == 'match_list' or url_name == 'match_detail' %}active{% endif %}">
+                <a href="/matches">Матчи</a></li>
+            <li class="{% if url_name == 'team_list' or url_name == 'team_detail' %}active{% endif %}">
+                <a href="/teams">Сборные</a></li>
+            <li class="{% if url_name == 'player_list' or url_name == 'player_detail' %}active{% endif %}">
+                <a href="/players">Игроки</a></li>
+          {% endwith %}
+      </ul>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input class="form-control" placeholder="Search" type="text">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+
+  {% comment %}<a class="navbar-brand" href="/">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/"> <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/tournaments">Турниры</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/matches">Матчи</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/teams">Сборные</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/players">Игроки</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" placeholder="Search" type="text">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>{% endcomment %}
+
+        </div>
+</div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

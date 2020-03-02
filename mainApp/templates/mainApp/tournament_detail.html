@@ -1,0 +1,28 @@
+{% extends 'mainApp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="jumbotron">
+                <div class="row">
+                <h1>{{ tournament.title }}</h1>
+                {% if tournament.image %}
+                    <img src="{{ tournament.image.url }}" width="660" alt="Пример">
+                {% endif %}
+                    <div class="col-12">
+                        {{ tournament.text|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  Basic panel
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

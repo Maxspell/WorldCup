@@ -1,0 +1,68 @@
+{% extends 'mainApp/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+                            <table class="table table-bordered table-striped table-active table-hover">
+                              <thead>
+                                <tr>
+                                    <th class="text-center" scope="col">Место</th>
+                                    <th class="text-center" scope="col">Сборная</th>
+                                    <th class="text-center" scope="col">И</th>
+                                    <th class="text-center" scope="col">В</th>
+                                    <th class="text-center" scope="col">Н</th>
+                                    <th class="text-center" scope="col">П</th>
+                                    <th class="text-center" scope="col">ЗП</th>
+                                    <th class="text-center" scope="col">Р</th>
+                                    <th class="text-center" scope="col">О</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for item in team_list  %}
+
+                                <tr>
+                                    <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                                    <td class="text-center"><a href="{% url 'team_detail' pk=item.pk slug=item.slug %}">{{ item.title }}</a></td>
+                                    <td class="text-center">{{ item.count_matches }}</td>
+                                    <td class="text-center">{{ item.win_count }}</td>
+                                    <td class="text-center">{{ item.draw_count }}</td>
+                                    <td class="text-center">{{ item.loss_count }}</td>
+                                    <td class="text-center">{{ item.goals_scored }}-{{ item.goals_conceded }}</td>
+                                    <td class="text-center">{{ item.difference }}</td>
+                                    <td class="text-center">{{ item.points }}</td>
+                                </tr>
+
+                              {% endfor %}
+                              </tbody>
+                            </table>
+            <ul class="pagination">
+                {% if team_list.has_previous %}
+                    <li><a href="?page={{ team_list.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><a href="#">&laquo;</a></li>
+                {% endif %}
+            {% for i in team_list.paginator.page_range %}
+                {% if team_list.number == i %}
+                    <li class="active"><a href="#">{{ i }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+                {% if team_list.has_next %}
+                    <li><a href="?page={{ team_list.paginator.num_pages }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><a href="#">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  Basic panel
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
